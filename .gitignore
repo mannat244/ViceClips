@@ -1,0 +1,51 @@
+# ====================================================================
+# Git Ignore for Stream Reel Studio (GTA 6 & Gaming Clips Pipeline)
+# ====================================================================
+
+# 1. Video & Media Files (Large Binaries)
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+*.flv
+*.ts
+*.m3u8
+
+# 2. Rendered Thumbnails & Cache Frames (keep placeholders only)
+temp/
+archive/
+inspect_frames/
+story_frames/
+*.vtt
+*.ass
+*.log
+
+# 3. Security & Sensitive Credentials (NEVER COMMIT REAL TOKENS!)
+config/publisher_config.json
+publisher_config.json
+client_secrets.json
+config/client_secrets.json
+youtube_token.json
+config/youtube_token.json
+*.pem
+*.key
+.env
+.env.*
+
+# 4. Python Environment & Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+venv/
+env/
+.venv/
+
+# 5. OS Generated Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp

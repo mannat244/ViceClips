@@ -1,0 +1,29 @@
+{
+  "youtube": {
+    "enabled": true,
+    "client_secrets_file": "config/client_secrets.json",
+    "token_file": "config/youtube_token.json",
+    "default_privacy": "public",
+    "category_id": "20"
+  },
+  "instagram": {
+    "enabled": true,
+    "method": "graph_api",
+    "meta_graph_api": {
+      "access_token": "YOUR_META_LONG_LIVED_ACCESS_TOKEN",
+      "instagram_user_id": "YOUR_INSTAGRAM_BUSINESS_ACCOUNT_ID",
+      "graph_api_version": "v19.0"
+    },
+    "cloudinary_temporary_hosting": {
+      "enabled": true,
+      "cloud_name": "YOUR_CLOUDINARY_CLOUD_NAME",
+      "api_key": "YOUR_CLOUDINARY_API_KEY",
+      "api_secret": "YOUR_CLOUDINARY_API_SECRET",
+      "auto_delete_after_publish": true
+    },
+    "direct_instagrapi": {
+      "username": "YOUR_IG_USERNAME",
+      "password": "YOUR_IG_PASSWORD"
+    }
+  }
+}
