@@ -1,0 +1,11 @@
+# ==============================================================================
+# Stream Reel Studio - Batch URL Queue
+# Add one YouTube stream, video, or podcast URL per line.
+# Lines starting with '#' are ignored.
+# ==============================================================================
+
+# Example 1: GTA 6 Gameplay Stream
+https://www.youtube.com/watch?v=169ZzvPxvvM
+
+# Example 2: Tech / Gaming Podcast
+https://www.youtube.com/watch?v=TFmtM1kRWp4

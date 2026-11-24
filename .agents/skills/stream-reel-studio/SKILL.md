@@ -1,126 +1,79 @@
 ---
 name: stream-reel-studio
 description: >-
-  Automated gaming livestream and video clipping, vertical 9:16 reel formatting
-  (streamer facecam split, word-synced animated subtitles, EBU R128 audio normalization),
-  review/approval management, and 1-click social publishing to YouTube Shorts and Instagram Reels.
-  Use when the user shares a YouTube stream/video link to cut, asks to extract viral moments,
-  review generated clips, or publish reels to Instagram and YouTube Shorts.
+  Turn YouTube streams, podcasts, and long-form videos into viral 9:16 vertical reels and shorts
+  (gaming facecam split, podcast framing, word-synced animated pop subtitles, EBU R128 audio normalization),
+  manage interactive reviews/approvals, and auto-post in 1 click to YouTube Shorts and Instagram Reels.
+  Use when the user shares any video link, asks to extract viral clips, batch-process streams/podcasts,
+  review clips, or publish reels to social media.
 ---
 
-# 🎮 Stream Reel Studio: Automated Clipping & Social Publishing
+# 🚀 Stream Reel Studio: The Creator & Faceless Channel Engine
 
-This skill provides an end-to-end automated pipeline to transform multi-hour gaming livestreams and long-form videos into high-retention, broadcast-quality **9:16 vertical reels and shorts**, manage approval workflows, and publish them with a single click to **Instagram Reels** and **YouTube Shorts**.
-
----
-
-## 📋 The 4-Stage Workflow
-
-```
-[Link Input] ──> [1. Cut & Format] ──> [2. Store] ──> [3. Take Approval] ──> [4. 1-Click Post]
-```
-
-1. **Ingest & Detect**: Extract metadata, chat reactions, and auto-subtitles. Apply the **Standalone Story Test** to discover the 3 best self-contained moments (40–60s each).
-2. **Cut & Format**: Fast-seek HLS slicing via FFmpeg (takes ~15s without downloading the full stream). Split layout into top facecam (38%) and bottom gameplay (62%). Overlay word-synced animated `.ass` karaoke subtitles and normalize audio to `-16 LUFS`.
-3. **Store**: Save high-definition video, cover thumbnail, catchy Shorts title, and Instagram caption with 5 targeted hashtags into `clips/<stream_slug>/manifest.json`.
-4. **Take Approval**: Generate an interactive review card in chat or CLI with preview links. Pause for user approval (`approved` status).
-5. **Post**: Publish approved clips to **Instagram Reels** (via Meta Content Publishing API + Cloudinary bridge) and **YouTube Shorts** (via YouTube Data API v3).
+Transform any YouTube gaming livestream, podcast, or long-form video into high-retention, monetizable **9:16 vertical Shorts and Reels** using AI agents or 1-click desktop menus.
 
 ---
 
-## 🛠️ CLI Quick Reference
+## 💡 What Matters to Creators & Clipping Channels
 
-The master CLI is located at [`clip_master.py`](../../clip_master.py) in the project root:
+1. **Massive Time Savings**: Turn a 4-hour livestream or 2-hour podcast into 3-5 ready-to-publish viral shorts in **60 seconds**, saving hours of manual cutting, captioning, and rendering.
+2. **Algorithmic Retention (Hooks + Payoffs)**: The **Standalone Story Test** ensures every clip has an irresistible 3-second premise, escalating curiosity, and a satisfying payoff.
+3. **High-Engagement Pop Subtitles**: MrBeast / Alex Hormozi style animated karaoke typography (`.ass`) with neon active-word pop and bold outlines placed safely above platform UI controls.
+4. **Mastered Audio (-16 LUFS)**: EBU R128 audio normalization so dialogue is punchy, loud, and crisp on phone speakers without clipping.
+5. **Passive Monetization**: Directly auto-publish to Instagram Reels and YouTube Shorts with SEO-optimized titles and 5 targeted viral hashtags.
+
+---
+
+## 🎬 Niche Presets
+
+The engine supports multiple content genres via `--mode`:
+
+- **Gaming (`--mode gaming`)**: Top 38% centered streamer facecam + bottom 62% focused gameplay. Perfect for GTA 6, Valorant, Minecraft, Call of Duty, Elden Ring, and esports streams.
+- **Podcast / Talk Show (`--mode podcast`)**: Centered speaker framing with high-contrast animated dialogue typography and cinematic blurred 9:16 background. Ideal for interviews, tech talks, and philosophical discussions.
+- **Auto-Detect (`--mode auto`)**: Scans video frames for facecam quadrants; if detected, applies the gaming split; otherwise applies the podcast layout.
+
+---
+
+## 🤖 Zero-Code Agent Setup (Antigravity, Codex, Cursor, Claude Code)
+
+You don't need to write terminal commands. Just prompt your agent naturally:
+
+### Single Video Prompt
+> *"Clip this video: `https://www.youtube.com/watch?v=...`, give me 3 viral moments, show me preview cards, and post upon my approval."*
+
+### Batch Processing Prompt
+> *"Process these 3 podcast links in batch mode using podcast layout, generate captions, and prepare for posting."*
+
+The agent will execute `clip_master.py`, track clip manifests, show you approval cards, and publish upon your confirmation.
+
+---
+
+## 💻 CLI & Developer Reference
 
 ```bash
-# 1. Process any YouTube stream/video (Cut, format, and store)
-python clip_master.py run --url "<YOUTUBE_URL>" --count 3
+# 1. Single Video (Cut, Auto-Subtitle & Store)
+python clip_master.py run --url "<YOUTUBE_URL>" --mode auto
 
-# 2. List all registered streams and their approval statuses
+# 2. Batch Processing (Process a list of videos at once)
+python clip_master.py batch --file batch_links.txt --mode podcast
+python clip_master.py batch --urls "url1,url2,url3" --mode gaming
+
+# 3. View All Stored Clips & Approval Statuses
 python clip_master.py list
 
-# 3. View review report & copy for a specific stream
-python clip_master.py review --stream "<STREAM_SLUG>"
+# 4. Review Generated Clips & Social Copy
+python clip_master.py review --stream "<stream_slug>"
 
-# 4. Approve clips for posting
-python clip_master.py approve --stream "<STREAM_SLUG>" --clip all
-python clip_master.py approve --stream "<STREAM_SLUG>" --clip 1
+# 5. Approve Clips
+python clip_master.py approve --stream "<stream_slug>" --clip all
 
-# 5. 1-Click Post approved clips to social media
-python clip_master.py post --stream "<STREAM_SLUG>" --clip 1 --platform all
-python clip_master.py post --stream "<STREAM_SLUG>" --clip 1 --platform instagram
-python clip_master.py post --stream "<STREAM_SLUG>" --clip 1 --platform youtube
-
-# 6. Test dry-run without uploading
-python clip_master.py post --stream "<STREAM_SLUG>" --clip 1 --platform all --dry-run
+# 6. 1-Click Publish to Social Media
+python clip_master.py post --stream "<stream_slug>" --clip all --platform all
+python clip_master.py post --stream "<stream_slug>" --clip 1 --platform instagram
 ```
 
 ---
 
-## 🎯 Standalone Story Test Standards
+## 🖥️ Desktop 1-Click Launcher (No Terminal Needed)
 
-Every selected clip must function as an independent, scroll-stopping story. Always enforce:
-
-1. **Premise Hook (0–5s)**: A clear question or bizarre incident that makes the viewer ask *"Why is this happening?"* or *"What is going to happen next?"*.
-2. **Setup & Escalation (5–35s)**: Rising tension, chaos, or comedic dialogue that keeps retention high.
-3. **Payoff (35–50s)**: An unexpected twist, punchline, disaster, or reaction that rewards the viewer for staying.
-4. **Reject Weak Footage**:
-   - ❌ Ordinary driving without an incident.
-   - ❌ Generic shooting without narrative context.
-   - ❌ Streamer laughing at chat when the in-game cause is not visible.
-
----
-
-## 📐 Video Specifications
-
-- **Format**: MP4 (H.264 / AAC)
-- **Dimensions**: `1080 × 1920` (9:16 Vertical)
-- **Framerate**: `60 FPS`
-- **Layout**: Top 38% (Streamer Facecam centered) + Bottom 62% (Centered Gameplay)
-- **Subtitles**: Styled ASS with thick black borders and neon active-word pop highlights placed safely above social media UI buttons (`MarginV=680`).
-- **Audio Target**: EBU R128 loudness normalization (`loudnorm=I=-16:TP=-1.5:LRA=11`).
-
----
-
-## ⚙️ Configuration File (`config/publisher_config.json`)
-
-To enable social media publishing, populate [`config/publisher_config.json`](../../config/publisher_config.json):
-
-```json
-{
-  "youtube": {
-    "enabled": true,
-    "client_secrets_file": "config/client_secrets.json",
-    "token_file": "config/youtube_token.json",
-    "default_privacy": "public",
-    "category_id": "20"
-  },
-  "instagram": {
-    "enabled": true,
-    "method": "graph_api",
-    "meta_graph_api": {
-      "access_token": "YOUR_META_ACCESS_TOKEN",
-      "instagram_user_id": "YOUR_INSTAGRAM_BUSINESS_ACCOUNT_ID",
-      "graph_api_version": "v19.0"
-    },
-    "cloudinary_temporary_hosting": {
-      "enabled": true,
-      "cloud_name": "YOUR_CLOUDINARY_CLOUD_NAME",
-      "api_key": "YOUR_CLOUDINARY_API_KEY",
-      "api_secret": "YOUR_CLOUDINARY_API_SECRET",
-      "auto_delete_after_publish": true
-    }
-  }
-}
-```
-
----
-
-## 💡 Troubleshooting & Validation
-
-- **Verify configuration and clips**:
-  ```bash
-  python auto_publisher.py --verify
-  ```
-- **Windows 1-Click GUI/Menu**:
-  Double-click [`Publish_Reels.bat`](../../Publish_Reels.bat) for an interactive menu with zero terminal typing.
+Double-click [`Publish_Reels.bat`](../../Publish_Reels.bat) to launch the interactive control panel with options to paste links, batch process, review cards, and auto-post.

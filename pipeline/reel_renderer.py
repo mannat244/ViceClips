@@ -14,22 +14,27 @@ from pathlib import Path
 FFMPEG_BIN = r"C:\ffmpeg\bin\ffmpeg.exe" if os.path.exists(r"C:\ffmpeg\bin\ffmpeg.exe") else "ffmpeg"
 
 
-def render_vertical_reel(raw_clip_path, ass_path, layout_cfg, output_mp4_path, thumb_path=None):
+def render_vertical_reel(raw_clip_path, ass_path, layout_cfg, output_mp4_path, thumb_path=None, mode="auto"):
     """
     Renders raw video clip into 9:16 vertical MP4 with subtitles and audio normalization.
+    Modes:
+      - 'gaming': Facecam top (38%) + Gameplay bottom (62%)
+      - 'podcast': Aesthetic blurred backdrop + focused center speaker + dialogue typography
+      - 'auto': Automatically select based on webcam detection
     """
     output_mp4_path = Path(output_mp4_path)
     output_mp4_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Windows FFmpeg colon escaping for filtergraph
-    # C:/path or D:/path needs escaped colon like D\:/path
     escaped_ass = str(ass_path).replace("\\", "/").replace(":", "\\:")
 
     has_cam = layout_cfg.get("has_facecam", False)
     cam_crop = layout_cfg.get("facecam_crop")
     gameplay_crop = layout_cfg.get("gameplay_crop", "crop=1200:in_h:360:0")
 
-    if has_cam and cam_crop:
+    use_split_cam = (mode == "gaming" or (mode == "auto" and has_cam and cam_crop))
+
+    if use_split_cam and cam_crop:
         filter_str = (
             f"[0:v]{cam_crop},scale=1080:720:force_original_aspect_ratio=increase,crop=1080:720[cam];"
             f"[0:v]{gameplay_crop},scale=1080:1200:force_original_aspect_ratio=increase,crop=1080:1200[game];"
@@ -37,10 +42,10 @@ def render_vertical_reel(raw_clip_path, ass_path, layout_cfg, output_mp4_path, t
             f"[vstacked]ass=filename='{escaped_ass}'[vout]"
         )
     else:
-        # Full gameplay vertical presentation with blurred letterbox background
+        # High-retention Podcast / IRL vertical composition
         filter_str = (
             f"[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=25:5[bg];"
-            f"[0:v]scale=1080:608[fg];"
+            f"[0:v]scale=1080:-2[fg];"
             f"[bg][fg]overlay=(W-w)/2:(H-h)/2[vbase];"
             f"[vbase]ass=filename='{escaped_ass}'[vout]"
         )

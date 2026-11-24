@@ -44,9 +44,9 @@ def slugify(text):
     return re.sub(r"[-\s]+", "_", text)[:40]
 
 
-def process_stream_pipeline(url, target_moments=3):
+def process_stream_pipeline(url, target_moments=3, mode="auto"):
     print("\n" + "=" * 70)
-    print(f"🎬 PROCESSING STREAM: {url}")
+    print(f"🎬 PROCESSING STREAM: {url} (Mode: {mode})")
     print("=" * 70)
 
     # Step 1: Ingest & Metadata
@@ -101,7 +101,7 @@ def process_stream_pipeline(url, target_moments=3):
         generate_ass_subtitles(stream_info.get("subs_file"), m["start_time"], m["duration"], ass_path)
 
         # 4c. Render Vertical Reel
-        render_vertical_reel(raw_slice, ass_path, layout_cfg, out_mp4, out_thumb)
+        render_vertical_reel(raw_slice, ass_path, layout_cfg, out_mp4, out_thumb, mode=mode)
 
         m["video_file"] = str(out_mp4)
         m["thumb_file"] = str(out_thumb)
@@ -121,6 +121,30 @@ def process_stream_pipeline(url, target_moments=3):
     print(f"   python clip_master.py approve --stream \"{stream_slug}\" --clip all")
     print(f"   python clip_master.py post --stream \"{stream_slug}\" --clip all --platform all")
     return stream_slug
+
+
+def process_batch_pipeline(urls, target_moments=3, mode="auto"):
+    print("\n" + "=" * 70)
+    print(f"🚀 LAUNCHING BATCH PROCESSING FOR {len(urls)} STREAMS/VIDEOS")
+    print("=" * 70)
+    completed_slugs = []
+    for idx, u in enumerate(urls, 1):
+        clean_url = u.strip()
+        if not clean_url or clean_url.startswith("#"):
+            continue
+        print(f"\n[{idx}/{len(urls)}] Processing batch item: {clean_url}")
+        try:
+            slug = process_stream_pipeline(clean_url, target_moments=target_moments, mode=mode)
+            completed_slugs.append(slug)
+        except Exception as e:
+            print(f"[!] Error processing batch item '{clean_url}': {e}")
+
+    print("\n" + "=" * 70)
+    print(f"🎉 BATCH COMPLETE: Successfully processed {len(completed_slugs)} of {len(urls)} videos!")
+    print("=" * 70)
+    for s in completed_slugs:
+        print(f"  • {s}")
+    return completed_slugs
 
 
 def list_all_streams():
@@ -226,6 +250,14 @@ def main():
     run_parser = subparsers.add_parser("run", help="Full automated pipeline: download, cut, format, and store")
     run_parser.add_argument("--url", required=True, help="YouTube video or stream URL")
     run_parser.add_argument("--count", type=int, default=3, help="Number of moments to extract")
+    run_parser.add_argument("--mode", choices=["auto", "gaming", "podcast", "generic"], default="auto", help="Content layout mode")
+
+    # Command: batch (multi-video / multi-link)
+    batch_parser = subparsers.add_parser("batch", help="Batch process multiple YouTube streams, podcasts, or links")
+    batch_parser.add_argument("--file", help="Path to text file containing YouTube URLs (one per line)")
+    batch_parser.add_argument("--urls", help="Comma-separated list of YouTube URLs")
+    batch_parser.add_argument("--count", type=int, default=3, help="Number of moments per video")
+    batch_parser.add_argument("--mode", choices=["auto", "gaming", "podcast", "generic"], default="auto", help="Content layout mode")
 
     # Command: list
     subparsers.add_parser("list", help="List all processed streams and clips")
@@ -250,7 +282,23 @@ def main():
     args = parser.parse_args()
 
     if args.command == "run":
-        process_stream_pipeline(args.url, target_moments=args.count)
+        process_stream_pipeline(args.url, target_moments=args.count, mode=args.mode)
+    elif args.command == "batch":
+        urls_to_process = []
+        if args.file:
+            p = Path(args.file)
+            if p.exists():
+                with open(p, "r", encoding="utf-8") as f:
+                    urls_to_process.extend([line.strip() for line in f if line.strip() and not line.strip().startswith("#")])
+            else:
+                print(f"[!] Batch file not found: {args.file}")
+                return
+        if args.urls:
+            urls_to_process.extend([u.strip() for u in args.urls.split(",") if u.strip()])
+        if not urls_to_process:
+            print("[!] No URLs provided. Use --file <path> or --urls \"<url1>,<url2>\"")
+            return
+        process_batch_pipeline(urls_to_process, target_moments=args.count, mode=args.mode)
     elif args.command == "list":
         list_all_streams()
     elif args.command == "review":
