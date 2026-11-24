@@ -1,8 +1,9 @@
-# 🔥 Stream Reel Studio (ViralClip Engine)
+# 🌴 ViceClips Studio: The Ultimate Content Heist Engine
 
-> **Turn Any YouTube Livestream, Podcast, or Long-Form Video into Viral 9:16 Shorts & Reels in 60 Seconds — Cut, Format, Auto-Subtitle, Review, & Auto-Post to Earn Big.**
+> **Pull Off the Ultimate Content Heist. Turn Multi-Hour GTA 6 Streams, Gaming Broadcasts & Podcasts into 5-Star Viral 9:16 Shorts & Reels in 60 Seconds — Auto-Subtitle, Review & Auto-Post to Earn Big.**
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![GTA 6 Hype Ready](https://img.shields.io/badge/GTA%20VI-Vice%20City%20Hype%20Ready-ff007f?logo=rockstargames&logoColor=white)]()
+[![Python](https://img.shields.io/badge/Python-3.10%2B-00f0ff?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![AI Agent Compatible](https://img.shields.io/badge/AI%20Agents-Antigravity%20%7C%20Codex%20%7C%20Claude%20%7C%20Cursor-purple)](https://antigravity.google)
 [![YouTube Shorts](https://img.shields.io/badge/YouTube-Shorts%20API%20v3-red?logo=youtube)](https://developers.google.com/youtube/v3)
@@ -16,8 +17,8 @@
 Don't want to install packages or configure JSON files manually? **Just paste this exact prompt into your AI assistant** (Antigravity IDE, Antigravity 2.0 app, Codex CLI, Claude Code, or Cursor):
 
 ```text
-Hey agent, I want to use Stream Reel Studio to extract viral clips and auto-post them:
-https://github.com/<your-username>/stream-reel-studio.git
+Hey agent, I want to use ViceClips Studio to extract viral clips and auto-post them:
+https://github.com/<your-username>/viceclips-studio.git
 
 1. Clone this repository and verify my environment (Python, FFmpeg).
 2. Run the interactive key setup wizard to gently guide me step-by-step through getting my Cloudinary, Instagram Reels, and YouTube Shorts keys.
@@ -147,8 +148,8 @@ A visually impressive clip that lacks context gets scrolled past. Every moment e
 
 ### 1. Install Dependencies
 ```bash
-git clone https://github.com/your-username/stream-reel-studio.git
-cd stream-reel-studio
+git clone https://github.com/your-username/viceclips-studio.git
+cd viceclips-studio
 pip install -r requirements.txt
 ```
 

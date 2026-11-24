@@ -1,21 +1,21 @@
 @echo off
-title Stream Reel Studio - Viral Clips & Social Auto-Publisher
-color 0B
+title ViceClips Studio - The Ultimate Content Heist Engine
+color 0D
 cd /d "D:\Reels"
 
 :MENU
 cls
 echo ==============================================================================
-echo       🔥 STREAM REEL STUDIO: CUT, AUTO-SUBTITLE, APPROVE & POST
-echo       Transform Gaming Streams, Podcasts & Videos into Viral Shorts & Reels
+echo       🌴 VICECLIPS STUDIO: THE ULTIMATE CONTENT HEIST ENGINE 🌴
+echo       Turn GTA 6, Streams & Podcasts into Viral 9:16 Shorts & Reels
 echo ==============================================================================
-echo   [1] Cut Single Video / Stream (Enter URL - Gaming, Podcast, or IRL)
-echo   [2] Batch Process Multiple Links (Process a list of videos at once)
-echo   [3] Review & Approve Pending Clips (Review titles, captions & status)
-echo   [4] 1-Click Publish Approved Clips (Push to Instagram Reels & Shorts)
-echo   [5] Quick Direct Publisher Menu
-echo   [6] List All Registered Clips & Analytics
-echo   [S] Interactive API Key Setup Wizard (Instagram, YouTube, Cloudinary)
+echo   [1] Scout & Cut Single Video (Enter URL - GTA 6, Gaming, Podcast)
+echo   [2] The Big Heist: Batch Process Multiple Links (Queue list of videos)
+echo   [3] Safehouse Review: Inspect & Approve Pending Clips
+echo   [4] The Getaway: 1-Click Publish to Instagram Reels & YouTube Shorts
+echo   [5] Direct Social Publisher
+echo   [6] Stash & Analytics: List All Processed Clips
+echo   [S] Keycard Wizard: Setup API Keys (Instagram, YouTube, Cloudinary)
 echo   [Q] Quit
 echo ==============================================================================
 echo.

@@ -1,17 +1,10 @@
 """
-🎮 GTA VI & Stream Clipper Master Orchestrator (clip_master.py)
+🌴 ViceClips Studio: The Ultimate Content Heist Engine (clip_master.py)
 
-Unified end-to-end pipeline CLI:
-  1. Process (Cut & Store): Ingest link, detect viral moments, crop layout, render 9:16 vertical reels.
-  2. Review & Approve: Review video previews, titles, and social copy.
-  3. Post: 1-click publishing to YouTube Shorts and Instagram Reels.
-
-Usage:
-  python clip_master.py run --url "https://www.youtube.com/watch?v=..."
-  python clip_master.py list
-  python clip_master.py review --stream <slug>
-  python clip_master.py approve --stream <slug> --clip <id_or_all>
-  python clip_master.py post --stream <slug> --clip <id_or_all> --platform [youtube|instagram|all]
+Pull off the ultimate content heist:
+  1. Scout & Cut: Ingest stream/podcast, detect 5-star viral moments, split layout, render 9:16 vertical reels.
+  2. Safehouse Review: Inspect preview cards, viral hooks, and social copy.
+  3. The Getaway: 1-click publishing to Instagram Reels and YouTube Shorts.
 """
 
 import os
@@ -244,7 +237,7 @@ def post_stream_clips(stream_name, clip_arg, platform="all", privacy="public", d
 
 
 def main():
-    parser = argparse.ArgumentParser(description="GTA 6 & Gaming Stream Reels Master Pipeline")
+    parser = argparse.ArgumentParser(description="🌴 ViceClips Studio: The Ultimate Content Heist Engine (GTA 6, Streams & Podcasts)")
     subparsers = parser.add_subparsers(dest="command")
 
     # Command: setup (interactive wizard)

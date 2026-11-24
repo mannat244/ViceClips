@@ -3,11 +3,11 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "stream-reel-studio"
+name = "viceclips-studio"
 version = "1.0.0"
-description = "Automated Gaming Livestream & Video Vertical Clipping, Editing, Approval, and 1-Click Social Publishing Engine"
+description = "ViceClips Studio: The Ultimate Content Heist Engine — Automated 9:16 Viral Shorts & Reels Generator"
 readme = "README.md"
-authors = [{ name = "Gaming Stream Studio Team" }]
+authors = [{ name = "ViceClips Studio Team" }]
 license = { text = "MIT" }
 requires-python = ">=3.10"
 dependencies = [
