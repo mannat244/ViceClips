@@ -37,6 +37,7 @@ from pipeline.approval_manager import (
     generate_review_markdown,
 )
 from pipeline.publisher import load_publisher_config, YouTubePublisher, InstagramPublisher
+from pipeline.setup_wizard import run_setup_wizard
 
 
 def slugify(text):
@@ -246,6 +247,9 @@ def main():
     parser = argparse.ArgumentParser(description="GTA 6 & Gaming Stream Reels Master Pipeline")
     subparsers = parser.add_subparsers(dest="command")
 
+    # Command: setup (interactive wizard)
+    subparsers.add_parser("setup", help="Interactive API key and credentials setup wizard")
+
     # Command: run (cut & store)
     run_parser = subparsers.add_parser("run", help="Full automated pipeline: download, cut, format, and store")
     run_parser.add_argument("--url", required=True, help="YouTube video or stream URL")
@@ -281,7 +285,9 @@ def main():
 
     args = parser.parse_args()
 
-    if args.command == "run":
+    if args.command == "setup":
+        run_setup_wizard()
+    elif args.command == "run":
         process_stream_pipeline(args.url, target_moments=args.count, mode=args.mode)
     elif args.command == "batch":
         urls_to_process = []

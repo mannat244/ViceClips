@@ -15,10 +15,11 @@ echo   [3] Review & Approve Pending Clips (Review titles, captions & status)
 echo   [4] 1-Click Publish Approved Clips (Push to Instagram Reels & Shorts)
 echo   [5] Quick Direct Publisher Menu
 echo   [6] List All Registered Clips & Analytics
+echo   [S] Interactive API Key Setup Wizard (Instagram, YouTube, Cloudinary)
 echo   [Q] Quit
 echo ==============================================================================
 echo.
-set /p opt="Select Option [1-6 / Q]: "
+set /p opt="Select Option [1-6 / S / Q]: "
 
 if /i "%opt%"=="1" goto CUT_STREAM
 if /i "%opt%"=="2" goto BATCH_STREAM
@@ -26,7 +27,15 @@ if /i "%opt%"=="3" goto REVIEW_CLIPS
 if /i "%opt%"=="4" goto POST_CLIPS
 if /i "%opt%"=="5" goto QUICK_PUB
 if /i "%opt%"=="6" goto LIST_CLIPS
+if /i "%opt%"=="S" goto SETUP_WIZARD
 if /i "%opt%"=="Q" exit /b
+goto MENU
+
+:SETUP_WIZARD
+echo.
+python clip_master.py setup
+echo.
+pause
 goto MENU
 
 :CUT_STREAM

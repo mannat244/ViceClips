@@ -11,6 +11,38 @@
 
 ---
 
+## ⚡ The "One-Prompt" AI Agent Kickoff (Paste, Sit Back & Relax)
+
+Don't want to install packages or configure JSON files manually? **Just paste this exact prompt into your AI assistant** (Antigravity IDE, Antigravity 2.0 app, Codex CLI, Claude Code, or Cursor):
+
+```text
+Hey agent, I want to use Stream Reel Studio to extract viral clips and auto-post them:
+https://github.com/<your-username>/stream-reel-studio.git
+
+1. Clone this repository and verify my environment (Python, FFmpeg).
+2. Run the interactive key setup wizard to gently guide me step-by-step through getting my Cloudinary, Instagram Reels, and YouTube Shorts keys.
+3. Test my connections live and let me know when we're 100% green.
+4. Then wait for my first video link to cut, review, and auto-post!
+```
+
+The agent will take over, inspect your machine, guide you through getting your API keys with direct links, test your credentials, and start cutting viral clips for you!
+
+---
+
+### 💬 Chat Slash Commands & Shortcuts
+
+When working with your AI agent in this workspace, you can use these simple commands:
+
+| Command / Prompt | What the Agent Does |
+| :--- | :--- |
+| **`/setup`** (or *"guide me with keys"*) | Launches the interactive onboarding wizard. The agent gently asks for your keys one by one with direct links and tests them live. |
+| **`/clip <youtube_url>`** | Slices the top 3 standalone stories, splits facecam/gameplay, adds word-pop animated subtitles, and generates review cards. |
+| **`/batch`** (or *"batch cut these links"*) | Runs the multi-video queue from `batch_links.txt` or a list of URLs. |
+| **`/review`** | Displays the approval report with clickable preview links, titles, and social captions. |
+| **`/publish`** (or *"approve and post"*) | 1-Click publishes approved clips directly to Instagram Reels and YouTube Shorts! |
+
+---
+
 ## 💰 Why Creators & Faceless Channels Use This to Earn Big
 
 Short-form content on YouTube Shorts and Instagram Reels is the fastest way to build an audience, secure brand sponsorships, and generate passive monetization. But manually watching hours of footage, trimming timestamps, cropping aspect ratios, and transcribing word-by-word subtitles takes 3–5 hours per video.
@@ -122,15 +154,17 @@ pip install -r requirements.txt
 
 *(Ensure [FFmpeg](https://ffmpeg.org/download.html) is installed and available on your system path).*
 
-### 2. Configure Credentials
-Copy the example config:
+### 2. Configure Credentials (Interactive Wizard)
+You don't need to hand-edit JSON files. Simply run the interactive setup wizard:
 ```bash
-copy config\publisher_config.example.json config\publisher_config.json
+python clip_master.py setup
 ```
+*(Or double-click `Publish_Reels.bat` and select `[S]`)*
 
-Add your keys to `config/publisher_config.json`:
-- **Instagram Reels**: Add your Meta Graph API `access_token`, `instagram_user_id`, and free [Cloudinary](https://cloudinary.com/) keys (used as a temporary bridge for Meta's servers to fetch the video).
-- **YouTube Shorts**: Place your Google Cloud OAuth `client_secrets.json` into `config/`.
+The wizard will guide you through:
+- **Cloudinary (Free Video Bridge)**: Explains where to get your free Cloud Name, API Key, and Secret from [cloudinary.com](https://cloudinary.com/) and tests the connection.
+- **Instagram Reels**: Explains how to get your Instagram Business Account ID and Meta User Token from [developers.facebook.com](https://developers.facebook.com/) and verifies your account handle live.
+- **YouTube Shorts**: Prompts you to drop `client_secrets.json` from [console.cloud.google.com](https://console.cloud.google.com/) into `config/`.
 
 ---
 
