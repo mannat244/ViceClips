@@ -30,6 +30,21 @@ The agent will take over, inspect your machine, guide you through getting your A
 
 ---
 
+## 📺 Live Demo: Raw Livestream vs. Final Vertical Reel
+
+See how ViceClips transforms a wide, horizontal 16:9 gameplay stream into an engaging, mobile-first 9:16 vertical reel with automatic facecam split, word-synced animated pop typography, and mastered audio:
+
+![Before & After Comparison](assets/before_after_comparison.jpg)
+
+### 🎬 Watch the Demo Clips
+| Stage | Format & Resolution | Video Link |
+| :--- | :--- | :--- |
+| **Raw Stream Input** | 16:9 Widescreen (1920x1080) | [▶️ Watch Raw 16:9 Slice](https://res.cloudinary.com/mjd9iwmi/video/upload/v1795505060/viceclips_public_demos/viceclips_demo_raw_marina.mp4) |
+| **ViceClips Vertical Reel** | 9:16 Vertical (1080x1920 @ 60 FPS) | [▶️ Watch Rendered Reel](https://res.cloudinary.com/mjd9iwmi/video/upload/v1795505071/viceclips_public_demos/viceclips_demo_final_marina.mp4) |
+| **Live Social Post** | Published Instagram Reel | [📱 View Live on Instagram (@gamesideclip)](https://www.instagram.com/reel/DgHQfWDCX0Z/) |
+
+---
+
 ### 💬 Chat Slash Commands & Shortcuts
 
 When working with your AI agent in this workspace, you can use these simple commands:
